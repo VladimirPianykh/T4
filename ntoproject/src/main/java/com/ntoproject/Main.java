@@ -1,16 +1,18 @@
 package com.ntoproject;
 
+import java.io.File;
 import java.util.function.Supplier;
 
 import javax.swing.SwingUtilities;
 
+import com.bpa4j.core.Navigator;
 import com.bpa4j.core.ProgramStarter;
 import com.bpa4j.core.Registrator;
 import com.bpa4j.core.User;
 import com.bpa4j.core.User.Feature;
 import com.bpa4j.core.User.Permission;
 import com.bpa4j.core.User.Role;
-import com.bpa4j.navigation.Navigator;
+import com.bpa4j.util.codegen.ProjectGraph;
 
 public class Main {
     public enum AppRole implements Role{
@@ -33,11 +35,11 @@ public class Main {
         private AppPermission(){Registrator.register(this);}
     }
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new ProjectGraph(new File("C:\\Users\\ice_d\\Desktop\\Моё\\Програмирование\\NTO training\\T4\\ntoproject\\src\\main\\java")).show();
         Navigator.init();
         ProgramStarter.welcomeMessage="Добро пожаловать в \"Золотую долину\"";
         ProgramStarter.authRequired=false;
-        if(ProgramStarter.firstLaunch){
+        if(ProgramStarter.isFirstLaunch()){
             //Регистрация пользователей
             User.register("Добыча","",AppRole.MINING);
             User.register("Переработка","",AppRole.REFINING);
