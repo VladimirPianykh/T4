@@ -1,12 +1,10 @@
 package com.ntoproject;
 
-import java.io.File;
 import java.util.function.Supplier;
 
 import javax.swing.SwingUtilities;
 
 import com.bpa4j.core.Data.EditableGroup;
-import com.bpa4j.core.Navigator;
 import com.bpa4j.core.ProgramStarter;
 import com.bpa4j.core.Registrator;
 import com.bpa4j.core.Root;
@@ -15,8 +13,8 @@ import com.bpa4j.core.User.Feature;
 import com.bpa4j.core.User.Permission;
 import com.bpa4j.core.User.Role;
 import com.bpa4j.defaults.features.DefaultFeature;
+import com.bpa4j.navigation.Navigator;
 import com.bpa4j.ui.PathIcon;
-import com.bpa4j.util.codegen.ProjectGraph;
 import com.ntoproject.editables.auxil.WorkNorm;
 import com.ntoproject.editables.registered.Device;
 import com.ntoproject.editables.registered.Nomencl;
@@ -77,7 +75,7 @@ public class Main {
         Navigator.init();
         ProgramStarter.welcomeMessage="Добро пожаловать в \"Золотую долину\"";
         ProgramStarter.authRequired=false;
-        if(ProgramStarter.isFirstLaunch()){
+        if(ProgramStarter.firstLaunch){
             //Регистрация пользователей
             User.register("Добыча","",AppRole.MINING);
             User.register("Переработка","",AppRole.REFINING);
@@ -110,7 +108,7 @@ public class Main {
             );
             ProgramStarter.runProgram();
             //Регистрация групп
-            Registrator.register(unit, nomencl, device, workType);
+            Registrator.register(unit, nomencl, device, workType,workNorm.hide());
             //Тестовые данные
             
         }else ProgramStarter.runProgram();
