@@ -1,4 +1,4 @@
-package com.ntoproject.editables.registered;
+package com.ntoproject.editables.auxil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,6 +6,10 @@ import java.util.function.Function;
 
 import com.bpa4j.core.Data.Editable;
 import com.bpa4j.editor.EditorEntry;
+import com.ntoproject.editables.registered.Device;
+import com.ntoproject.editables.registered.Nomencl;
+import com.ntoproject.editables.registered.Unit;
+import com.ntoproject.editables.registered.WorkType;
 
 public class WorkNorm extends Editable{
 	public WorkNorm(){

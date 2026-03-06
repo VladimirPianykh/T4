@@ -16,10 +16,10 @@ import com.bpa4j.core.User.Permission;
 import com.bpa4j.core.User.Role;
 import com.bpa4j.ui.PathIcon;
 import com.bpa4j.util.codegen.ProjectGraph;
+import com.ntoproject.editables.auxil.WorkNorm;
 import com.ntoproject.editables.registered.Device;
 import com.ntoproject.editables.registered.Nomencl;
 import com.ntoproject.editables.registered.Unit;
-import com.ntoproject.editables.registered.WorkNorm;
 import com.ntoproject.editables.registered.WorkType;
 
 public class Main {
