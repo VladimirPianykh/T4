@@ -20,6 +20,7 @@ import com.ntoproject.editables.registered.Device;
 import com.ntoproject.editables.registered.Nomencl;
 import com.ntoproject.editables.registered.Unit;
 import com.ntoproject.editables.registered.WorkType;
+import com.ntoproject.features.NormReport;
 
 public class Main {
     public enum AppRole implements Role{
@@ -29,10 +30,11 @@ public class Main {
                 AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL,
                 AppPermission.CREATE_DEVICE, AppPermission.READ_DEVICE,
                 AppPermission.CREATE_WORKTYPE, AppPermission.READ_WORKTYPE,
-                AppPermission.CREATE_WORKNORM, AppPermission.READ_WORKNORM
+                AppPermission.CREATE_WORKNORM, AppPermission.READ_WORKNORM,
             },
             ()->new Feature[]{
-                DefaultFeature.MODEL_EDITING
+                DefaultFeature.MODEL_EDITING,
+                NormReport.instance.register()
             }
         ),
         REFINING(
