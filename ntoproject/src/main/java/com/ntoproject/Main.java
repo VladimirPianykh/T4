@@ -14,6 +14,7 @@ import com.bpa4j.core.User;
 import com.bpa4j.core.User.Feature;
 import com.bpa4j.core.User.Permission;
 import com.bpa4j.core.User.Role;
+import com.bpa4j.defaults.features.DefaultFeature;
 import com.bpa4j.ui.PathIcon;
 import com.bpa4j.util.codegen.ProjectGraph;
 import com.ntoproject.editables.auxil.WorkNorm;
@@ -32,7 +33,9 @@ public class Main {
                 AppPermission.CREATE_WORKTYPE, AppPermission.READ_WORKTYPE,
                 AppPermission.CREATE_WORKNORM, AppPermission.READ_WORKNORM
             },
-            ()->new Feature[]{}
+            ()->new Feature[]{
+                DefaultFeature.MODEL_EDITING
+            }
         ),
         REFINING(
             ()->new Permission[]{
@@ -40,14 +43,18 @@ public class Main {
                 AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL,
                 AppPermission.CREATE_DEVICE, AppPermission.READ_DEVICE
             },
-            ()->new Feature[]{}
+            ()->new Feature[]{
+                DefaultFeature.MODEL_EDITING
+            }
         ),
         QUALITY(
             ()->new Permission[]{
                 AppPermission.CREATE_UNIT, AppPermission.READ_UNIT,
                 AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL
             },
-            ()->new Feature[]{}
+            ()->new Feature[]{
+                DefaultFeature.MODEL_EDITING
+            }
         );
         private AppRole(Supplier<Permission[]>p,Supplier<Feature[]>f){SwingUtilities.invokeLater(()->Registrator.register(this,f.get(),p.get()));}
     }
@@ -87,8 +94,8 @@ public class Main {
                 Nomencl.class
             );
             EditableGroup<Device>device=new EditableGroup<>(
-                new PathIcon("ui/factory.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
-                new PathIcon("ui/factory_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/product_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/product.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 Device.class
             );
             EditableGroup<WorkType>workType=new EditableGroup<>(
@@ -97,13 +104,13 @@ public class Main {
                 WorkType.class
             );
             EditableGroup<WorkNorm>workNorm=new EditableGroup<>(
-                new PathIcon("ui/factory.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
-                new PathIcon("ui/factory_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/worker_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/worker.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 WorkNorm.class
             );
             ProgramStarter.runProgram();
             //Регистрация групп
-            
+            Registrator.register(unit, nomencl, device, workType);
             //Тестовые данные
             
         }else ProgramStarter.runProgram();
