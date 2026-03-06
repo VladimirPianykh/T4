@@ -170,7 +170,7 @@
 		"scope":"java",
 		"prefix":"_nameProvider",
 		"body":[
-			"public class NameProvider implements com.bpa4j.editor.NameProvider{",
+			"public static class NameProvider implements com.bpa4j.editor.NameProvider{",
 				"\tpublic String provideName(Editable editable){",
 					"\t\t${0:return editable.name;}",
 				"\t}",
@@ -182,7 +182,7 @@
 		"scope":"java",
 		"prefix":"_infoProvider",
 		"body":[
-			"public class InfoProvider implements com.bpa4j.editor.InfoProvider{",
+			"public static class InfoProvider implements com.bpa4j.editor.InfoProvider{",
 				"\tpublic JComponent provideInfo(Editable original,EditableDemo editable){",
 					"\t\t${0:return new JLabel(\"Нет данных\");}",
 				"\t}",
