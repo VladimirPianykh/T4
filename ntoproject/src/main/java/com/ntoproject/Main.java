@@ -13,9 +13,15 @@ import com.bpa4j.core.User.Feature;
 import com.bpa4j.core.User.Permission;
 import com.bpa4j.core.User.Role;
 import com.bpa4j.defaults.features.DefaultFeature;
+import com.bpa4j.editor.ModularEditor;
+import com.bpa4j.editor.modules.ExcludeModule;
+import com.bpa4j.editor.modules.LimitToModule;
+import com.bpa4j.editor.modules.TableModule;
 import com.bpa4j.navigation.Navigator;
 import com.bpa4j.ui.PathIcon;
+import com.ntoproject.editables.auxil.ActualWork;
 import com.ntoproject.editables.auxil.WorkNorm;
+import com.ntoproject.editables.registered.ActualWorkBundle;
 import com.ntoproject.editables.registered.Device;
 import com.ntoproject.editables.registered.Narad;
 import com.ntoproject.editables.registered.Nomencl;
@@ -36,7 +42,8 @@ public class Main {
                 AppPermission.CREATE_WORKNORM, AppPermission.READ_WORKNORM,
                 AppPermission.READ_PLAN,AppPermission.CREATE_PLAN,
                 AppPermission.READ_NARAD,AppPermission.CREATE_NARAD,
-                AppPermission.READ_SHIFT,AppPermission.CREATE_SHIFT
+                AppPermission.READ_SHIFT,AppPermission.CREATE_SHIFT,
+                AppPermission.READ_ACTUALWORKBUNDLE,AppPermission.CREATE_ACTUALWORKBUNDLE
             },
             ()->new Feature[]{
                 DefaultFeature.MODEL_EDITING,
@@ -81,15 +88,21 @@ public class Main {
         CREATE_NARAD,
         READ_SHIFT,
         CREATE_SHIFT,
+        READ_ACTUALWORKBUNDLE,
+        CREATE_ACTUALWORKBUNDLE,
         
         ;
         private AppPermission(){Registrator.register(this);}
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         // new ProjectGraph(new File("C:\\Users\\ice_d\\Desktop\\Моё\\Програмирование\\NTO training\\T4\\ntoproject\\src\\main\\java")).show();
         Navigator.init();
         ProgramStarter.welcomeMessage="Добро пожаловать в \"Золотую долину\"";
         ProgramStarter.authRequired=false;
+        ProgramStarter.editor=new ModularEditor(
+            new ExcludeModule(((ModularEditor)ProgramStarter.editor).modules.getFirst(),ActualWorkBundle.class),
+            new LimitToModule(new TableModule(ActualWorkBundle.class.getField("workTable"),ActualWork.class),ActualWorkBundle.class)
+        );
         if(ProgramStarter.firstLaunch){
             //Регистрация пользователей
             User.register("Добыча","",AppRole.MINING);
@@ -136,9 +149,14 @@ public class Main {
                 new PathIcon("ui/worker_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 Shift.class
             );
+            EditableGroup<ActualWorkBundle>workBundles=new EditableGroup<>(
+                new PathIcon("ui/v1/order.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/v1/product.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                ActualWorkBundle.class
+            );
             ProgramStarter.runProgram();
             //Регистрация групп
-            Registrator.register(unit, nomencl, device, workType,workNorms.hide(),plans,shifts,narads);
+            Registrator.register(unit, nomencl, device, workType,workNorms.hide(),plans,shifts,narads,workBundles);
             //Тестовые данные
             
         }else ProgramStarter.runProgram();
