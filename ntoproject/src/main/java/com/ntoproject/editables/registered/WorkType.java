@@ -25,7 +25,7 @@ public class WorkType extends Editable{
 		}
 	}
 	@EditorEntry(translation="Оборудование", editorBaseSource = SelectFromEditor.class)
-	public ArrayList<Device> device=new ArrayList<>();	
+	public ArrayList<Device> device=new ArrayList<>();
 	@EditorEntry(translation="Продукция")
 	public Nomencl product;
 	@EditorEntry(translation="Единицы измерения",editorBaseSource = FunctionEditor.class)

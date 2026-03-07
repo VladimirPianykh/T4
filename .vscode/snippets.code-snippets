@@ -203,5 +203,29 @@
 			"}"
 		],
 		"description":""
+	},
+	"startDate and endDate fields":{
+		"scope":"java",
+		"prefix":"_dates",
+		"body":[
+			"@EditorEntry(translation=\"${1:Дата начала}\")",
+			"public LocalDate startDate=LocalDate.now();",
+			"@EditorEntry(translation=\"${2:Дата окончания}\")",
+			"public LocalDate endDate=LocalDate.now().plusDays(7);",
+			"$0"
+		],
+		"description":"Add startDate/endDate with EditorEntry"
+	},
+	"Static init block (for SelectFromEditor.configure, FlagWEditor.configure, etc.)":{
+		"scope":"java",
+		"prefix":"_static",
+		"body":[
+			"static{",
+				"\ttry{",
+					"\t\t$0",
+				"\t}catch(Exception ex){throw new RuntimeException(ex);}",
+			"}"
+		],
+		"description":"static try-catch for reflective config"
 	}
 }
