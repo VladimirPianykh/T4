@@ -1,7 +1,6 @@
 package com.ntoproject.editables.auxil;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 import com.bpa4j.core.Data.Editable;
 import com.bpa4j.editor.EditorEntry;

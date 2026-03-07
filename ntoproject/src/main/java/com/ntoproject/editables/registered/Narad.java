@@ -8,15 +8,17 @@ import java.util.function.Function;
 import com.bpa4j.core.Data.Editable;
 import com.bpa4j.defaults.input.FunctionEditor;
 import com.bpa4j.editor.EditorEntry;
+import com.bpa4j.editor.Input;
 
+@Input(completer = Narad.Completer.class)
 public class Narad extends Editable{
 	public static class Completer implements com.bpa4j.editor.Completer{
-		public boolean isCompletable(Editable editable,int fieldsEdited){
+		public boolean isCompletable(Editable original,Editable editable,int fieldsEdited){
 			Narad e=(Narad)editable;
-			return e.plan!=null&&fieldsEdited>=1;
+			return e.plan!=null;
 		}
-		public void completeObject(Editable editable,int fieldsEdited){
-			Narad e=(Narad)editable;
+		public void completeObject(Editable original,Editable editable,int fieldsEdited){
+			Narad e=(Narad)original;
 			Plan plan=e.plan;
 			if(fieldsEdited<2)e.date=plan.date;
 			if(fieldsEdited<4)e.workType=plan.workType;
