@@ -17,7 +17,10 @@ import com.bpa4j.navigation.Navigator;
 import com.bpa4j.ui.PathIcon;
 import com.ntoproject.editables.auxil.WorkNorm;
 import com.ntoproject.editables.registered.Device;
+import com.ntoproject.editables.registered.Narad;
 import com.ntoproject.editables.registered.Nomencl;
+import com.ntoproject.editables.registered.Plan;
+import com.ntoproject.editables.registered.Shift;
 import com.ntoproject.editables.registered.Unit;
 import com.ntoproject.editables.registered.WorkType;
 import com.ntoproject.features.NormReport;
@@ -31,6 +34,9 @@ public class Main {
                 AppPermission.CREATE_DEVICE, AppPermission.READ_DEVICE,
                 AppPermission.CREATE_WORKTYPE, AppPermission.READ_WORKTYPE,
                 AppPermission.CREATE_WORKNORM, AppPermission.READ_WORKNORM,
+                AppPermission.READ_PLAN,AppPermission.CREATE_PLAN,
+                AppPermission.READ_NARAD,AppPermission.CREATE_NARAD,
+                AppPermission.READ_SHIFT,AppPermission.CREATE_SHIFT
             },
             ()->new Feature[]{
                 DefaultFeature.MODEL_EDITING,
@@ -41,7 +47,7 @@ public class Main {
             ()->new Permission[]{
                 AppPermission.CREATE_UNIT, AppPermission.READ_UNIT,
                 AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL,
-                AppPermission.CREATE_DEVICE, AppPermission.READ_DEVICE
+                AppPermission.CREATE_DEVICE, AppPermission.READ_DEVICE,
             },
             ()->new Feature[]{
                 DefaultFeature.MODEL_EDITING
@@ -50,7 +56,7 @@ public class Main {
         QUALITY(
             ()->new Permission[]{
                 AppPermission.CREATE_UNIT, AppPermission.READ_UNIT,
-                AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL
+                AppPermission.CREATE_NOMENCL, AppPermission.READ_NOMENCL,
             },
             ()->new Feature[]{
                 DefaultFeature.MODEL_EDITING
@@ -69,6 +75,13 @@ public class Main {
         CREATE_NOMENCL,
         READ_DEVICE,
         CREATE_DEVICE,
+        READ_PLAN,
+        CREATE_PLAN,
+        READ_NARAD,
+        CREATE_NARAD,
+        READ_SHIFT,
+        CREATE_SHIFT,
+        
         ;
         private AppPermission(){Registrator.register(this);}
     }
@@ -94,8 +107,8 @@ public class Main {
                 Nomencl.class
             );
             EditableGroup<Device>device=new EditableGroup<>(
-                new PathIcon("ui/product_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
-                new PathIcon("ui/product.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/right.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/left.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 Device.class
             );
             EditableGroup<WorkType>workType=new EditableGroup<>(
@@ -103,14 +116,29 @@ public class Main {
                 new PathIcon("ui/worker_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 WorkType.class
             );
-            EditableGroup<WorkNorm>workNorm=new EditableGroup<>(
+            EditableGroup<WorkNorm>workNorms=new EditableGroup<>(
                 new PathIcon("ui/worker_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 new PathIcon("ui/worker.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
                 WorkNorm.class
             );
+            EditableGroup<Plan>plans=new EditableGroup<>(
+                new PathIcon("ui/product.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/product_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                Plan.class
+            );
+            EditableGroup<Narad>narads=new EditableGroup<>(
+                new PathIcon("ui/product.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/product_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                Narad.class
+            );
+            EditableGroup<Shift>shifts=new EditableGroup<>(
+                new PathIcon("ui/worker.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                new PathIcon("ui/worker_add.png",Root.SCREEN_SIZE.height/11,Root.SCREEN_SIZE.height/11),
+                Shift.class
+            );
             ProgramStarter.runProgram();
             //Регистрация групп
-            Registrator.register(unit, nomencl, device, workType,workNorm.hide());
+            Registrator.register(unit, nomencl, device, workType,workNorms.hide(),plans,shifts,narads);
             //Тестовые данные
             
         }else ProgramStarter.runProgram();

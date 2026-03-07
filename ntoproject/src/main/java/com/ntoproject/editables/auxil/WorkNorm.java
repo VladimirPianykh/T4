@@ -20,9 +20,9 @@ public class WorkNorm extends Editable{
 	public LocalDate date=LocalDate.now();
 	@EditorEntry(translation="Вид работы")
 	public WorkType workType;
-	@EditorEntry(translation="Обородувоние")
+	@EditorEntry(translation="Обородувоние",editorBaseSource = FunctionEditor.class)
 	public static Function<WorkNorm,ArrayList<Device>> device=e->e.workType.device;
-	@EditorEntry(translation="Продукция")
+	@EditorEntry(translation="Продукция",editorBaseSource = FunctionEditor.class)
 	public static Function<WorkNorm,Nomencl>product=e->e.workType.product;
 	@EditorEntry(translation="Норма за смену")
 	public int norm;

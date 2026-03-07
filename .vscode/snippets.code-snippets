@@ -216,6 +216,28 @@
 		],
 		"description":"Add startDate/endDate with EditorEntry"
 	},
+	"startTime and endTime fields":{
+		"scope":"java",
+		"prefix":"_times",
+		"body":[
+			"@EditorEntry(translation=\"${1:Время начала}\")",
+			"public LocalDateTime startTime=LocalDateTime.now();",
+			"@EditorEntry(translation=\"${2:Время окончания}\")",
+			"public LocalDateTime endTime=LocalDateTime.now().plusHours(5);",
+			"$0"
+		],
+		"description":"Add startDate/endDate with EditorEntry"
+	},
+	"Creation date fields":{
+		"scope":"java",
+		"prefix":"_crdate",
+		"body":[
+			"@EditorEntry(translation=\"${1:Дата создания}\")",
+			"public LocalDate date=LocalDate.now();",
+			"$0"
+		],
+		"description":"Add startDate/endDate with EditorEntry"
+	},
 	"Static init block (for SelectFromEditor.configure, FlagWEditor.configure, etc.)":{
 		"scope":"java",
 		"prefix":"_static",
